@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "686957059477",
+    "firebase_url": "https://work-part-hours-default-rtdb.firebaseio.com",
+    "project_id": "work-part-hours",
+    "storage_bucket": "work-part-hours.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686957059477:android:e4cbb352c0e7248baeea9c",
+        "android_client_info": {
+          "package_name": "work.parts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686957059477-1gbak36ss9ucigmoqaoimn4c13d36le2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDj91tU9E-CtOVmEHXuqnwRGSqzGtdDdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686957059477-1gbak36ss9ucigmoqaoimn4c13d36le2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

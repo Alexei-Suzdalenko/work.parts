@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="radio.budilnik.Index">
+    <item
+        android:orderInCategory="50"
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        />
+    <item
+        android:id="@+id/new_employee"
+        android:orderInCategory="100"
+        android:title="@string/new_employee"
+        />
+    <item
+        android:orderInCategory="150"
+        android:id="@+id/new_work"
+        android:title="@string/new_work"
+        />
+
+</menu>

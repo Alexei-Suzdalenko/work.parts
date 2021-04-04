@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/company_back"
+    tools:context=".company.NewEmployeerActivity">
+
+    <LinearLayout
+        android:id="@+id/menu_register"
+        android:background="@drawable/layout_bg"
+        android:layout_margin="22dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="@string/enter_data_new_employeer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="18sp"
+            android:layout_marginTop="44dp"
+            android:inputType="text"
+            android:id="@+id/emploeer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill,TextFields"
+            android:hint="@string/emploeer_name"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            />
+        <EditText
+            android:textSize="18sp"
+            android:textColorHint="@color/grey"
+            android:inputType="text"
+            android:id="@+id/emploeer_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill,TextFields"
+            android:hint="@string/emploeer_email"
+            android:textColor="@color/black"
+            android:layout_marginTop="11dp"
+            />
+        <EditText
+            android:textSize="18sp"
+            android:textColorHint="@color/grey"
+            android:inputType="text"
+            android:id="@+id/employee_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill,TextFields"
+            android:hint="@string/employee_password"
+            android:textColor="@color/black"
+            android:layout_marginTop="11dp"
+            />
+        <Button
+            android:textAllCaps="false"
+            android:layout_marginTop="66dp"
+            android:backgroundTint="@color/gris"
+            android:id="@+id/create_employee"
+            android:text="@string/create_employee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="44dp"
+            android:text="@string/legenda"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</ScrollView>

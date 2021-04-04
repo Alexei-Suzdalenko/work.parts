@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:background="@drawable/company_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register_login.RegisterCompanyActivity">
+
+    <LinearLayout
+        android:id="@+id/menu_register"
+        android:background="@drawable/layout_bg"
+        android:layout_margin="22dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="@string/employee_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="18sp"
+            android:layout_marginTop="66dp"
+            android:textColorHint="@color/grey"
+            android:inputType="text"
+            android:id="@+id/employee_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill,TextFields"
+            android:hint="@string/email"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:textSize="18sp"
+            android:textColorHint="@color/grey"
+            android:inputType="text"
+            android:id="@+id/employee_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill,TextFields"
+            android:hint="@string/password"
+            android:textColor="@color/black"
+            android:layout_marginTop="11dp"
+            />
+        <Button
+            android:textAllCaps="false"
+            android:id="@+id/employee_btn_login"
+            android:backgroundTint="@color/gris"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empl_login"
+            android:textColor="@color/white"
+            android:layout_marginTop="54dp"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
