@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,6 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 // current employee create new work part for current work
 class EmployeeCreateNewPart : AppCompatActivity() {
+    private lateinit var mInterstitialAd: InterstitialAd
     lateinit var db: FirebaseFirestore
     var titleWork: String = ""
     var company_id: String = ""
@@ -48,8 +53,29 @@ class EmployeeCreateNewPart : AppCompatActivity() {
 
         db = Firebase.firestore
 
-        create_part.setOnClickListener { saveNewPart(company_id, work_id, user_email!!, user_name!!) }
+        MobileAds.initialize(this) {}
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                val intent = Intent(applicationContext, EmployeeListsWorkParts::class.java)
+                App.editor.putString(Common.WORK_NAME, titleWork)
+                App.editor.putString(Common.COMPANY_ID, company_id)
+                App.editor.putString(Common.WORK_ID, work_id)
+                App.editor.apply()
+                intent.putExtra(Common.WORK_NAME, titleWork)
+                intent.putExtra(Common.COMPANY_ID, company_id)
+                intent.putExtra(Common.WORK_ID, work_id)
+                startActivity(intent); finish()
+            }
+        }
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
+
+
+        create_part.setOnClickListener {
+            saveNewPart(company_id, work_id, user_email!!, user_name!!)
+        }
     }
 
     private fun saveNewPart(company_id: String, work_id: String, user_email: String, user_name: String) {
@@ -68,15 +94,18 @@ class EmployeeCreateNewPart : AppCompatActivity() {
            if( task.isSuccessful ){
                // go to list part this work
                Toast.makeText(applicationContext, resources.getString(R.string.new_past_saved), Toast.LENGTH_LONG).show()
-               val intent = Intent(this, EmployeeListsWorkParts::class.java)
-                 App.editor.putString(Common.WORK_NAME, titleWork)
-                 App.editor.putString(Common.COMPANY_ID, company_id)
-                 App.editor.putString(Common.WORK_ID, work_id)
-                 App.editor.apply()
-                 intent.putExtra(Common.WORK_NAME, titleWork)
-                 intent.putExtra(Common.COMPANY_ID, company_id)
-                 intent.putExtra(Common.WORK_ID, work_id)
-               startActivity(intent); finish()
+               if (mInterstitialAd.isLoaded) { mInterstitialAd.show() }
+               else {
+                   val intent = Intent(applicationContext, EmployeeListsWorkParts::class.java)
+                   App.editor.putString(Common.WORK_NAME, titleWork)
+                   App.editor.putString(Common.COMPANY_ID, company_id)
+                   App.editor.putString(Common.WORK_ID, work_id)
+                   App.editor.apply()
+                   intent.putExtra(Common.WORK_NAME, titleWork)
+                   intent.putExtra(Common.COMPANY_ID, company_id)
+                   intent.putExtra(Common.WORK_ID, work_id)
+                   startActivity(intent); finish()
+               }
            } else {
                create_part.isEnabled = true
                Toast.makeText(applicationContext, resources.getString(R.string.error_ocurried), Toast.LENGTH_LONG).show()

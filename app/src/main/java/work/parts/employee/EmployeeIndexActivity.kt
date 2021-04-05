@@ -3,14 +3,20 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdOptions
 import kotlinx.android.synthetic.main.activity_employee_index.*
 import work.parts.R
 import work.parts.register_login.RegisterCompanyActivity
@@ -23,6 +29,8 @@ import work.parts.utils.models.Work
 // show me list work for current user for current user company
 class EmployeeIndexActivity : AppCompatActivity() {
     lateinit var employeeViewModel: EmployeeViewModel
+    private lateinit var mAdView: AdView
+    lateinit var adLoader: AdLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +55,49 @@ class EmployeeIndexActivity : AppCompatActivity() {
             listWorksEmployee.setOnItemClickListener { _, _, i, _ ->
                 createMenuOptions(i, works)
             }
+
         }
+
+       MobileAds.initialize(this) {}
+       mAdView = findViewById(R.id.adViewEmployeeIndexWork)
+       val adRequest = AdRequest.Builder().build()
+       mAdView.adListener = object: AdListener() {
+           override fun onAdLoaded() {
+               var size = 66
+               val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+               if( mAdView.height > 15 ) size = mAdView.height
+               params.setMargins(22, 0, 22, size)
+               listWorksEmployee.layoutParams = params
+           }
+       }
+       mAdView.loadAd(adRequest)
+
+
+
+
+
+
 
 
     }
+
+    private val adSize: AdSize
+        get() {
+            val display = windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            var adWidthPixels = listWorksEmployee.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
+            }
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
+        }
+
 
 
     private fun createMenuOptions(i: Int, works: MutableList<Work>){

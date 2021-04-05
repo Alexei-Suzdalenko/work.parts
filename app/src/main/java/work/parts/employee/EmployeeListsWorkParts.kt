@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_employee_index.*
@@ -18,6 +23,7 @@ import work.parts.utils.models.Part
 class EmployeeListsWorkParts : AppCompatActivity() {
     // employee show me all list part to current work
     lateinit var listWorkViewModel: EmplListWorkViewModel
+    private lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,20 @@ class EmployeeListsWorkParts : AppCompatActivity() {
         }
 
         listWorkViewModel = ViewModelProvider(this).get(EmplListWorkViewModel::class.java)
+
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adViewEmployeeListWork)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                var size = 66
+                val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+                if( mAdView.height > 15 ) size = mAdView.height
+                params.setMargins(22, 0, 22, size)
+                employeeListPart.layoutParams = params
+            }
+        }
+        mAdView.loadAd(adRequest)
     }
 
 
@@ -41,6 +61,8 @@ class EmployeeListsWorkParts : AppCompatActivity() {
         val user_email = App.sharedPreferences.getString(Common.EMPLOYEE_EMAIL, null)
 
         listWorkViewModel.getListWorkCompanyWorkId(company_id, work_id, this).observeForever { listPart ->
+            if (listPart.size == 0 ){ imageEmployeeListPart.visibility = View.VISIBLE }
+            else { imageEmployeeListPart.visibility = View.GONE }
             progress_list_work_parts.visibility = View.GONE
             employeeListPart.adapter = EmployeeListPartAdapter(this, listPart)
             employeeListPart.setOnItemClickListener { _, _, i, _ ->

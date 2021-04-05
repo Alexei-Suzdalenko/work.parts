@@ -19,7 +19,7 @@ class App: Application() {
         lateinit var workReference: DatabaseReference
         lateinit var sharedPreferences: SharedPreferences
         lateinit var editor: SharedPreferences.Editor
-
+        var showMeInitincial = false
     }
 
     @SuppressLint("CommitPrefEdits")

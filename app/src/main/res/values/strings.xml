@@ -71,7 +71,6 @@
     <string name="part_deleted">This part deleted</string>
     <string name="save">Save</string>
     <string name="part_edited">This part edited and saved</string>
-    <string name="ass">СКАЧИВАЕМ РАДИО ДРУГАЯ АСТРАХАНЬ в Google Play</string>
     <string name="show_resume_work">Working results</string>
     <string name="work_parts">Working parts</string>
     <string name="delete_work_and_parts">Delete work and parts</string>
@@ -87,4 +86,6 @@
     <string name="employee">Employee</string>
     <string name="delete_employee">Delete employee</string>
     <string name="employee_deleted">Employee removed</string>
+    <string name="file_csv" translatable="false">File.csv</string>
+    <string name="file_txt" translatable="false">File.txt</string>
 </resources>
