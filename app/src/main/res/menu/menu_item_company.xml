@@ -8,6 +8,11 @@
         android:title="@string/logout"
         />
     <item
+        android:orderInCategory="60"
+        android:id="@+id/comment"
+        android:title="@string/comment"
+        />
+    <item
         android:id="@+id/new_employee"
         android:orderInCategory="100"
         android:title="@string/new_employee"

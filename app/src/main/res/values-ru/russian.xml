@@ -11,7 +11,7 @@
     <string name="company_email"> Электронный адрес компании </string>
     <string name="company_registration"> Регистрация компании </string>
     <string name="employee_entrance"> Вход для сотрудников </string>
-    <string name="company_entrance"> Вход в компанию </string>
+    <string name="company_entrance"> Вход для компании </string>
     <string name="enter_data"> Введите данные правильно </string>
     <string name="register_company"> Регистрация компании </string>
     <string name="сompany_login"> Логин компании </string>

@@ -2,6 +2,8 @@ package work.parts.company
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -63,6 +65,12 @@ class CompanyIndexActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 11);
             }
         }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                val permi = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                requestPermissions(permi, 7)
+            }
+        }
 
         var i = 0
 
@@ -78,6 +86,10 @@ class CompanyIndexActivity : AppCompatActivity() {
             R.id.logout -> { auth.signOut(); startActivity(Intent(this, CompanyEnterActivity::class.java)); finish(); return true }
             R.id.new_employee -> { startActivity(Intent(this, NewEmployeerActivity::class.java)); return true }
             R.id.new_work -> { startActivity(Intent(this, NewWorkActivity::class.java)); return true }
+            R.id.comment -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=work.parts")))
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

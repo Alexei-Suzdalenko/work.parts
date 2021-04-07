@@ -7,4 +7,9 @@
         android:id="@+id/logout_employee"
         android:title="@string/logout"
         />
+    <item
+        android:orderInCategory="60"
+        android:id="@+id/comment"
+        android:title="@string/comment"
+        />
 </menu>

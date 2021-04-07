@@ -1,5 +1,6 @@
 package work.parts.employee
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -150,6 +151,10 @@ class EmployeeIndexActivity : AppCompatActivity() {
                 App.editor.putString(Common.EMPLOYEE_EMAIL, Common.NONE)
                 App.editor.apply()
                 startActivity(Intent(this, RegisterCompanyActivity::class.java)); finish()
+                return true
+            }
+            R.id.comment -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=work.parts")))
                 return true
             }
             else -> super.onOptionsItemSelected(item)

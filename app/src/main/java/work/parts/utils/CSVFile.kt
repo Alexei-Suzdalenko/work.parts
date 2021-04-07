@@ -1,19 +1,17 @@
 package work.parts.utils
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import work.parts.R
 import work.parts.utils.models.Part
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 object CSVFile {
 
