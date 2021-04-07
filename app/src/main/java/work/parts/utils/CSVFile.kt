@@ -16,13 +16,13 @@ import work.parts.utils.models.Part
 import java.io.File
 
 object CSVFile {
-    fun createCSVfile(context: Context){
-      //  Toast.makeText(context,  context.resources.getString(R.string.app_name), Toast.LENGTH_SHORT).show()
-    }
 
     fun save(fileName: String, context: Context, name: String, companyId: String, workId: String) {
         var data: String = "";
         val newLine = "\n"
+        var hours = 0
+        var kms = 0
+        var costs = 0
         val path = context.getExternalFilesDir(null)
         try {
             val file = File(path, fileName)
@@ -31,6 +31,7 @@ object CSVFile {
             file.createNewFile()
 
             Firebase.firestore.collection(Common.PARTS).document(companyId).collection(workId).get().addOnSuccessListener { documents ->
+                data += "$name $newLine"
                 if (documents != null) {
                     for (document in documents) {
                         val part: Part = document.toObject<Part>()
@@ -41,11 +42,20 @@ object CSVFile {
                         data += part.km.toString() + " " + context.resources.getString(R.string.item_km)  + ", "
                         data += part.work_done + ", "
                         data += part.comment + " " + newLine
+                        hours += part.working_time
+                        kms += part.km
+                        costs += part.costs
                     }
+                    data += newLine
+                    data += "Total $newLine"
+                    data += "$hours h $newLine"
+                    data += "$kms km $newLine"
+                    data += costs.toString() + " " + context.resources.getString(R.string.item_cost)
+
                     file.printWriter().use { out -> out.print(data) }
 
                     val sharingIntent = Intent(Intent.ACTION_SEND)
-                    sharingIntent.type = "$name/*"
+                    sharingIntent.type = "$fileName/*"
                     sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(file.absolutePath))
                     context.startActivity(Intent.createChooser(sharingIntent, name))
                     App.showMeInitincial = true

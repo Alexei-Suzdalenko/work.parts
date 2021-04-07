@@ -61,7 +61,7 @@
     <string name="date">Datum</string>
     <string name="new_past_saved">Nový díl uložen</string>
     <string name="item_hours">h</string>
-    <string name="item_cost">$</string>
+    <string name="item_cost">€</string>
     <string name="item_km">km</string>
     <string name="show_part">Zobrazit podrobnosti</string>
     <string name="edit_part">Upravit</string>

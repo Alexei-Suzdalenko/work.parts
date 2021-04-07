@@ -54,8 +54,7 @@ class PlaceholderFragment : Fragment() {
                  }
              }
              mAdView.loadAd(adRequest)
-     // CSVFile.createCSVfile(context!!)
-     // CSVFile.save("file.txt", context!!)
+
         when( index ){
             1 -> {
                 pageViewModel.fetchWork().observe(this, Observer { listWork ->
@@ -118,11 +117,15 @@ class PlaceholderFragment : Fragment() {
 
 
     private fun createCSVFileAndShare(name: String, companyId: String, workId: String) {
-        CSVFile.save("file.csv", context!!, name, companyId, workId)
+        var fileName = name.replace(" ", "_")
+        fileName = "$fileName.csv"
+        CSVFile.save(fileName, context!!, name, companyId, workId)
     }
 
     private fun createTXTFileAndShare(name: String, companyId: String, workId: String) {
-        CSVFile.save("file.txt", context!!, name, companyId, workId)
+        var fileName = name.replace(" ", "_")
+        fileName = "$fileName.txt"
+        CSVFile.save(fileName, context!!, name, companyId, workId)
     }
 
 
@@ -137,7 +140,7 @@ class PlaceholderFragment : Fragment() {
 
     private fun deleteWork(name: String, companyId: String, workId: String){
         Repos().companyDeleteWork(companyId, workId).observeForever { ok ->
-            if ( ok == "ok" ) Toast.makeText(context!!, name + context!!.resources.getString(R.string.deleted), Toast.LENGTH_SHORT).show()
+            if ( ok == "ok" ) Toast.makeText(context!!, name + " " + context!!.resources.getString(R.string.deleted), Toast.LENGTH_SHORT).show()
         }
     }
 

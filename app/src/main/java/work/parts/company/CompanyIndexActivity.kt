@@ -3,7 +3,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,28 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import work.parts.R
 import work.parts.register_login.CompanyEnterActivity
 import work.parts.ui.main.SectionsPagerAdapter
 import work.parts.utils.App
 import work.parts.utils.App.Companion.auth
-import work.parts.utils.Common
+
 import work.parts.utils.models.Company
-import kotlin.concurrent.thread
+
 
 class CompanyIndexActivity : AppCompatActivity() {
-    private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,18 +65,7 @@ class CompanyIndexActivity : AppCompatActivity() {
         }
 
         var i = 0
-        MobileAds.initialize(this) {}
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
-             Thread {
-                 while (true){
-                     Thread.sleep(5000)
-                     Log.d("tag", (i++).toString())
-                     runOnUiThread{ if (mInterstitialAd.isLoaded && App.showMeInitincial) { mInterstitialAd.show();  App.showMeInitincial = false} }
-                 }
-             }.start()
     }
 
 

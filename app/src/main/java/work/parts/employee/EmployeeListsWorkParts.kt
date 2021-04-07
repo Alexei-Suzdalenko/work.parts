@@ -12,6 +12,8 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_employee_index.*
@@ -22,6 +24,7 @@ import work.parts.utils.models.Part
 
 class EmployeeListsWorkParts : AppCompatActivity() {
     // employee show me all list part to current work
+    private var mInterstitialAd: InterstitialAd? = null
     lateinit var listWorkViewModel: EmplListWorkViewModel
     private lateinit var mAdView: AdView
 
@@ -51,6 +54,19 @@ class EmployeeListsWorkParts : AppCompatActivity() {
             }
         }
         mAdView.loadAd(adRequest)
+
+        val adRequest2 = AdRequest.Builder().build()
+        InterstitialAd.load(this, "ca-app-pub-7286158310312043/7014945190", adRequest2, object : InterstitialAdLoadCallback() {
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
+        Thread{
+            while (true){
+                Thread.sleep(2000)
+                runOnUiThread { if (mInterstitialAd != null) { mInterstitialAd?.show(this)} }
+            }
+        }.start()
     }
 
 
